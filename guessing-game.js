@@ -4,8 +4,18 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+
+// make a random whole number between min and max
+
+function randomInRange (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+
 // init the secret numbers.
-let secretNumber = 17
+let secretNumber = randomInRange(1, 100)
+
 
 // function for checking the user's guess.
 function checkGuess (guess) {
@@ -15,10 +25,10 @@ function checkGuess (guess) {
     } else if (guess < secretNumber) {
         console.log("Too low")
         return false
-    } else { 
+    } else {
         console.log("Correct!")
         return true
-       }  
+       }
     }
 
 // function to check the user's guess for the sn.
@@ -36,4 +46,4 @@ function askGuess() {
     })
   }
 
-askGuess()
+// askGuess()
