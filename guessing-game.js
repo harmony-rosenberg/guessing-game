@@ -8,10 +8,9 @@ const rl = readline.createInterface({
 // make a random whole number between min and max
 
 function randomInRange (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    let int =  Math.floor(Math.random() * (max - min + 1)) + min;
+    askGuess(int)
 }
-
-
 
 // init the secret numbers.
 let secretNumber = randomInRange(1, 100)
@@ -31,6 +30,19 @@ function checkGuess (guess) {
        }
     }
 
+    function askRange() {
+        rl.question('Enter a min number: ', handleResponseOne);
+
+        function handleResponseOne(min) {
+            rl.question('Enter a max number: ', handledResponseTwo);
+
+            function handledResponseTwo(max) {
+                console.log(`I'm thinking a number between ${min} and ${max}...`);
+                randomInRange(min, max);
+            }
+        }
+    }
+
 // function to check the user's guess for the sn.
 function askGuess() {
     rl.question('Enter a guess: ', (guess) => {
@@ -46,4 +58,4 @@ function askGuess() {
     })
   }
 
-// askGuess()
+askRange()
