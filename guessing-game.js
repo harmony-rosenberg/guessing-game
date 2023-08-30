@@ -10,6 +10,9 @@ function randomInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+let secretNumber;
+let numAttempts;
+
 // Function to check the user's guess
 function checkGuess(guess) {
   if (guess > secretNumber) {
@@ -26,17 +29,31 @@ function checkGuess(guess) {
 
 // Function to ask the user for a guess
 function askGuess() {
+    if (numAttempts === 0) {
+        console.log(`You lose😡😡😡`);
+        rl.close()
+        return;
+    }
+
   rl.question('Enter a guess: ', (guess) => {
     const numberGuess = Number(guess);
     const result = checkGuess(numberGuess);
 
     if (result === true) {
-      console.log('You won!');
+        console.log('You won!');
       rl.close();
     } else {
+        numAttempts--;
       askGuess();
     }
   });
+}
+
+function askLimit() {
+    rl.question('Enter the number of attempts: ', (limit) => {
+        numAttempts = parseInt(limit);
+        askRange()
+    });
 }
 
 // Function to handle user input for the min and max range
@@ -51,7 +68,7 @@ function askRange() {
 }
 
 // Initialize the secret number
-let secretNumber;
 
+//askRange()
 
-askRange();
+askLimit();
